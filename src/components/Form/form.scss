@@ -1,0 +1,85 @@
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+    margin: 100px auto 0;
+    display: block;
+
+    input {
+        margin-bottom: 10px;
+        width: 90%;
+        margin: 5px 5%;
+        height: 15px;
+        border: none;
+        outline: none;
+        color: #c4c4c4;
+        text-transform: lowercase;
+
+        &:focus {
+            color: #323232;
+        }
+
+        &:focus .form-input__container {
+            border: 2px solid #59003b;
+        }
+    }
+
+    label {
+        color: #797575;
+        font-weight: 500;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    &-input__container {
+        height: 30px;
+        border: 2px solid #e0e0e0;
+        margin-bottom: 15px;
+        margin-top: 5px;
+
+    }
+
+&-submit__status{
+margin-top: 10px;
+margin-top: 10px;
+font-size: 18px;
+color: #59003b;
+}
+
+}
+
+.form-submit__btn {
+    width: 140px;
+    height: 50px;
+    color: #fff;
+    background-color: #7a0352;
+    border-radius: 15px;
+    margin-left: 0;
+    margin-top: 20px;
+
+    &:hover {
+        background-color: #59003b;
+        transition: 0.5s all;
+    }
+}
+
+.form-input__container:focus-within {
+    border-color: #7a0352;
+}
+
+input.input-name {
+    text-transform: uppercase;
+}
+
+.error-btn {
+    background-color: #ae6395;
+    width: 140px;
+    height: 50px;
+    color: #fff;
+    border-radius: 15px;
+    margin-left: 0;
+    margin-top: 20px;
+}
+.error-form-text{
+    margin-bottom: 5px;
+}
