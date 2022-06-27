@@ -96,20 +96,20 @@ const emailHandler = (e)=>{
  const submitData =async e=>{
   e.preventDefault();
   setClickSubmit(true)
-  // setFormValid(false)
   try{
   await axios.post(`https://jsonplaceholder.typicode.com/users`, { data })
     .then(res => {
       setSuccessSubmit('success')
       console.log(res);
       console.log(res.data);
-      // setFormValid(false)
+      setFormValid(false)
       clearInput()
     })
   }catch(e){
     setSuccessSubmit('error')
     console.log('sending error'+ e);
-    // setFormValid(true)
+    setFormValid(true)
+
   } 
 }
 
