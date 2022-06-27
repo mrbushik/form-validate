@@ -34,51 +34,25 @@ function App() {
   }
 
 React.useEffect(() => {
-if(emailError || nameError || numberError ) {
+if(emailError || nameError || numberError || massageError ) {
 setFormValid(false)
-}else{
+}else {
   setFormValid(true)
 }
-},[emailError, nameError, numberError])
+},[emailError, nameError, numberError, massageError])
 
 const nameHandler = (e) =>{
-  const valudateName = /([а-яА-яa-zA-z]+\s)+([а-яА-яa-zA-z]+)/ig;
-  setClickSubmit(false)
+  const valudateName =  /(([а-яА-яa-zA-z]{3,20})+\s)+(([а-яА-яa-zA-z]{3,20})+)/ig;
+  // если требуется не только при вводе но и при отправке приводить имя в верхний регистр 
+  // setName(e.target.value.toUpperCase())
   setName(e.target.value)
+  setClickSubmit(false)
   if(!valudateName.test(e.target.value)){
     setNameError('Введите правильно Ваше имя и фамилию')
   }else{
     setNameError('')
+    
   }
-}
-
-const massageHandler = (e)=>{
-  setMassage(e.target.value)
-  setClickSubmit(false)
-  if(e.target.value.length < 10 || e.target.value.length > 300){
-    setMassageError('Длинна этого поля должна состявлять от 10 до 300 символов')
-  setFormValid(false)
-  }else{
-    setMassageError('')
-  setFormValid(true)
-
-  }
-}
-
-const phoneNumberHendler = (e)=>{
-  const validatePhoneNumber = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/
-  setClickSubmit(false)
-  setNumber(e.target.value)
-  if(!validatePhoneNumber.test(e.target.value)){
-    setNumberError('Введите правильно номер телефона')
-  }else{
-    setNumberError('')
-  }
-}
-const dateHandler = (e) => {
-  setDate(e.target.value)
-  setClickSubmit(false)
-  data.date = e.target.value
 }
 
 const emailHandler = (e)=>{
@@ -93,16 +67,43 @@ const emailHandler = (e)=>{
   return 
 }
 
+const phoneNumberHendler = (e)=>{
+  const validatePhoneNumber = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/
+  setClickSubmit(false)
+  setNumber(e.target.value)
+  if(!validatePhoneNumber.test(e.target.value)){
+    setNumberError('Введите правильно номер телефона')
+  }else{
+    setNumberError('')
+  }
+}
+
+const dateHandler = (e) => {
+  setDate(e.target.value)
+  setClickSubmit(false)
+  data.date = e.target.value
+}
+
+const massageHandler = (e)=>{
+  setMassage(e.target.value)
+  setClickSubmit(false)
+  if(e.target.value === ''){
+    setMassageError('')
+  }else if(e.target.value.length < 10 || e.target.value.length > 300)  {
+    setMassageError('Длинна этого поля должна состявлять от 10 до 300 символов')
+  }else{
+    setMassageError('')
+  }
+}
+
  const submitData =async e=>{
   e.preventDefault();
   setClickSubmit(true)
   setFormValid(false)
   try{
-  await axios.post(`https://jsonplaceholder.typicode.com/users`, { data })
-    .then(res => {
+    await axios.post(`https://jsonplaceholder.typicode.com/users`, { data })
+     .then(res => {
       setSuccessSubmit('success')
-      console.log(res);
-      console.log(res.data);
       setFormValid(false)
       clearInput()
     })
@@ -110,7 +111,6 @@ const emailHandler = (e)=>{
     setSuccessSubmit('error')
     console.log('sending error'+ e);
     setFormValid(true)
-
   } 
 }
 
