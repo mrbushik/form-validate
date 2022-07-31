@@ -50,8 +50,7 @@ const nameHandler = (e) =>{
   if(!valudateName.test(e.target.value)){
     setNameError('Введите правильно Ваше имя и фамилию')
   }else{
-    setNameError('')
-    
+    setNameError('') 
   }
 }
 
